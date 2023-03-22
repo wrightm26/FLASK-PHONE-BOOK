@@ -4,7 +4,7 @@ from app.forms import AddInfo
 
 @app.route('/')
 def index():
-    return render_template('index.html', posts=info)
+    return render_template('index.html')
 
 
 @app.route('/addinfo', methods=["GET", "POST"])
