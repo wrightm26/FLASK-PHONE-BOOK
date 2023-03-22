@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Information {% endblock %}
+
+{% block header %}
+    <h1>Add Information</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {{ forms.csrf_token }}
+
+                        {{ forms.first_name.label }}
+                        {{ forms.first_name(class="form-control", placeholder="Enter First Name") }}
+
+                        {{ forms.last_name.label }}
+                        {{ forms.last_name(class="form-control", placeholder="Enter Last Name") }}
+
+                        {{ forms.number.label }}
+                        {{ forms.number(class="form-control", placeholder="Enter Cell/Home Number") }}
+
+                        {{ forms.address.label }}
+                        {{ forms.address(class="form-control", placeholder="Enter Address") }}
+
+                        {{ forms.city.label }}
+                        {{ forms.city(class="form-control", placeholder="Enter City") }}
+
+                        {{ forms.state.label }}
+                        {{ forms.state(class="form-control", placeholder="Enter State") }}
+
+                        {{ forms.zip_code.label }}
+                        {{ forms.zip_code(class="form-control", placeholder="Zip Code") }}
+
+                        {{ forms.submit(class="btn btn-outline-secondary w-100 mt-3") }}
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

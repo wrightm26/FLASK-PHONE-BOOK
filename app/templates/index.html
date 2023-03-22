@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block header %}
+    <h1>Welcome to our Address Book</h1>
+    {% if add_information %}
+        <h5><em>Thank you for adding your information to our Address Book</em></h5>
+    {% else %}
+        <h6><em>Please Click "Add Information" to continue!</em></h6>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <!-- Left 2/3 Column -->
+        <div class="col-12 col-lg-8 order-1 order-lg-0 ">
+
+                <table class="table text-body">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">NAME</th>
+                        <th scope="col">NUMBER</th>
+                        <th scope="col">ADDRESS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark Brown</td>
+                        <td>653 - 382 - 4839 </td>
+                        <td>123 Real Street<br>Fantasy, World 53920</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Lilly Brown</td>
+                        <td>295 - 582 - 2984 </td>
+                        <td>444 Water Creek<br>Under, World 58290</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Jonny Brown</td>
+                        <td>888 - 582 - 5739 </td>
+                        <td>312 Circle Drive<br>Flower, World 69920</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+        </div>
+
+        <!-- Right 1/3 Column -->
+        <div class="col-12 col-lg-4 order-0 order-lg-1">
+
+            <div class="position-sticky top-0">
+                <div class="card mt-3">
+                    <div class="card-header">Search</div>
+                    <div class="card-body">
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text-dark" class="form-control" placeholder="Enter Search Term...">
+                                <button type="submit" class="btn btn-warning">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
