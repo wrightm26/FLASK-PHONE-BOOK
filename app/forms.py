@@ -8,7 +8,4 @@ class AddInfo(FlaskForm):
     last_name = StringField('Last Name', validators=[InputRequired()])
     number = StringField('Number', validators=[InputRequired()])
     address = StringField('Address', validators=[InputRequired()])
-    city = StringField('City', validators=[InputRequired()])
-    state = StringField('State', validators=[InputRequired()])
-    zip_code = StringField('Zip Code', validators=[InputRequired()])
     submit = SubmitField('Add Information')
