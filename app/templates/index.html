@@ -4,10 +4,11 @@
 
 {% block header %}
     <h1>Welcome to our Address Book</h1>
-    {% if add_information %}
-        <h5><em>Thank you for adding your information to our Address Book</em></h5>
+    {% if present_user.is_authenticated %}
+        <h5>Thank you {{ present_user.username }} for visiting us again!</h5>
     {% else %}
-        <h6><em>Please Click "Add Information" to continue!</em></h6>
+        <h5>Please <strong>SIGN UP</strong> or <strong>LOG IN</strong> to Add Information to our Address Book!</h5>
+    </h5>
     {% endif %}
 {% endblock %}
 
@@ -16,37 +17,46 @@
         <!-- Left 2/3 Column -->
         <div class="col-12 col-lg-8 order-1 order-lg-0 ">
 
-                <table class="table text-body">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">NAME</th>
-                        <th scope="col">NUMBER</th>
-                        <th scope="col">ADDRESS</th>
-                    </tr>
-                    </thead>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Address</th>
+                </tr>
+                </thead>
+                {% for information in info %}
                     <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark Brown</td>
-                        <td>653 - 382 - 4839 </td>
-                        <td>123 Real Street<br>Fantasy, World 53920</td>
+                        <th scope="row">{{ information.id }}</th>
+                        <td>{{ information.first_name }} {{ information.last_name  }}</td>
+                        <td>{{ information.number }}</td>
+                        <td>{{ information.address }}</td>
+                        <!-- {% if information.author == present_user %}
+                            <div class="modal fade" id="deleteUserInfoModal-{{ userinfo.user_id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete {{ userinfo.title }}?</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                                Are you sure you want to delete {{ userinfo.title }}? This action cannot be undone.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <a href="{{ url_for('delete_post', user_id=user.id) }}" class="btn btn-danger">Delete Post</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %} -->
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Lilly Brown</td>
-                        <td>295 - 582 - 2984 </td>
-                        <td>444 Water Creek<br>Under, World 58290</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Jonny Brown</td>
-                        <td>888 - 582 - 5739 </td>
-                        <td>312 Circle Drive<br>Flower, World 69920</td>
-                    </tr>
-                    </tbody>
-                </table>
+                {% endfor %}
 
+                    </tbody>
+            </table>
 
         </div>
 
