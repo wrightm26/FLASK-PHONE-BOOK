@@ -7,36 +7,48 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col">
-            <div class="card mt-3">
-                <div class="card-body">
+    <div class="row justify-content-evenly">
+        <div class="col-10 d-flex justify-content-evenly">
+            <div class="card mt-5 p-3 d-flex justify-content-evenly">
+                <div class="card-body d-flex justify-content-between">
                     <form action="" method="post">
-                        {{ forms.csrf_token }}
+                        {{ form.csrf_token }}
+                        <div class="row">
+                            <div class="col-6">
+                                {{ form.first_name.label }}
+                                {{ form.first_name(class="form-control", placeholder="Enter First Name") }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.last_name.label }}
+                                {{ form.last_name(class="form-control", placeholder="Enter Last Name") }}
+                            </div>
 
-                        {{ forms.first_name.label }}
-                        {{ forms.first_name(class="form-control", placeholder="Enter First Name") }}
+                            <div class="col-6">
+                                {{ form.email.label }}
+                                {{ form.email(class="form-control", placeholder="Enter Email") }}
+                            </div>
 
-                        {{ forms.last_name.label }}
-                        {{ forms.last_name(class="form-control", placeholder="Enter Last Name") }}
+                            <div class="col-6">
+                                {{ form.username.label }}
+                                {{ form.username(class="form-control", placeholder="Enter Username") }}
+                            </div>
 
-                        {{ forms.email.label }}
-                        {{ forms.email(class="form-control", placeholder="Enter Email") }}
-
-                        {{ forms.username.label }}
-                        {{ forms.username(class="form-control", placeholder="Enter Username") }}
-
-                        {{ forms.password.label }}
-                        {{ forms.password(class="form-control", placeholder="Enter Password") }}
-
-                        {{ forms.confirm_pass.label }}
-                        {{ forms.confirm_pass(class="form-control", placeholder="Confirm Your Password") }}
-
-                        {{ forms.submit(class="btn btn-primary w-100 mt-3") }}
+                            <div class="col-6">
+                                {{ form.password.label }}
+                                {{ form.password(class="form-control", placeholder="Enter Password") }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.confirm_pass.label }}
+                                {{ form.confirm_pass(class="form-control", placeholder="Confirm Your Password") }}
+                            </div>
+                        </div>
+                        {{ form.submit(class="btn btn-primary w-100 mt-3") }}
+                        <h6 class="pt-3 text-center">Already have an account?<p><a href="/login" class="link-primary link-center">Log In</a></p></h6>
 
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
 {% endblock %}

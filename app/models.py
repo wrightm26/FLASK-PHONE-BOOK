@@ -13,10 +13,16 @@ class User(db.Model):
     address = db.Column(db.String(100), nullable=False, unique=True)
     person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
 
+
+
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         db.session.add(self)
         db.session.commit()
+
+    def __repr__(self):
+        return f"<User {self.id}|{self.first}>"
 
 class Person(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,3 +49,5 @@ class Person(db.Model, UserMixin):
 @login_manager.user_loader
 def get_a_user_by_id(person_id):
     return db.session.get(Person, person_id)
+
+

@@ -2,56 +2,65 @@
 
 {% block title %} Home {% endblock %}
 
-{% block header %}
-    <h1>Welcome to our Address Book</h1>
-    {% if present_user.is_authenticated %}
-        <h5>Thank you {{ present_user.username }} for visiting us again!</h5>
-    {% else %}
-        <h5>Please <strong>SIGN UP</strong> or <strong>LOG IN</strong> to Add Information to our Address Book!</h5>
-    </h5>
-    {% endif %}
-{% endblock %}
+    {% block header %}
+        <h1>Welcome to our Address Book</h1>
+        {% if current_user.is_authenticated %}
+            <h5>Thank you {{ current_user.username }} for visiting us again!</h5>
+        {% else %}
+            <h6 class="mt-4">Please <strong><a href="/signup" class="link-light link-center">Sign Up</a></strong> or <strong><a href="/login" class="link-light link-center">Log In</a></strong> to Add Information to our Address Book!</h6>
+        </h5>
+        {% endif %}
+    {% endblock %}
 
 {% block content %}
     <div class="row">
         <!-- Left 2/3 Column -->
         <div class="col-12 col-lg-8 order-1 order-lg-0 ">
 
-            <table class="table">
+            <table class="table mt-5">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Number</th>
                     <th scope="col">Address</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 {% for information in info %}
                     <tbody>
                     <tr>
                         <th scope="row">{{ information.id }}</th>
-                        <td>{{ information.first_name }} {{ information.last_name  }}</td>
+                        <td>{{ information.first }} {{ information.last  }}</td>
                         <td>{{ information.number }}</td>
                         <td>{{ information.address }}</td>
-                        <!-- {% if information.author == present_user %}
-                            <div class="modal fade" id="deleteUserInfoModal-{{ userinfo.user_id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete {{ userinfo.title }}?</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                                Are you sure you want to delete {{ userinfo.title }}? This action cannot be undone.
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <a href="{{ url_for('delete_post', user_id=user.id) }}" class="btn btn-danger">Delete Post</a>
-                                        </div>
+                        {% if information.author == current_user %}
+                            <td>
+                                <a href="{{ url_for('edit', information_id=information.id) }}" class="btn btn-success">Edit</a>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteInformationModal-{{ information.id }}">
+                                    Delete
+                                </button>
+                            </td>
+                        <div class="modal fade" id="deleteInformationModal-{{ information.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">{{ information.first }} {{ information.last }}<br>{{ information.number }}<br>{{ information.address }}?</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete the following? This action cannot be undone.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <a href="{{ url_for('delete', information_id=information.id) }}" class="btn btn-danger">Delete</a>
+
                                     </div>
                                 </div>
                             </div>
-                        {% endif %} -->
+                        </div>
+
+                        {% endif %}
                     </tr>
                 {% endfor %}
 
@@ -64,7 +73,7 @@
         <div class="col-12 col-lg-4 order-0 order-lg-1">
 
             <div class="position-sticky top-0">
-                <div class="card mt-3">
+                <div class="card mt-5">
                     <div class="card-header">Search</div>
                     <div class="card-body">
                         <form action="">

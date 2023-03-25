@@ -7,20 +7,25 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col">
-            <div class="card mt-3">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="card mt-5">
                 <div class="card-body">
                     <form action="" method="post">
-                        {{ forms.csrf_token }}
+                        {{ form.csrf_token }}
+                        <div class="row">
+                            <div class="col-6">
+                                {{ form.username.label }}
+                                {{ form.username(type='text', class='form-control', placeholder='Enter Username') }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.password.label }}
+                                {{ form.password(type='text', class='form-control', placeholder='Enter Password') }}
 
-                        {{ forms.username.label }}
-                        {{ forms.username(class='form-control', placeholder='Enter Username') }}
-
-                        {{ forms.password.label }}
-                        {{ forms.password(class='form-control', placeholder='Enter Password') }}
-
-                        {{ forms.submit(class='btn btn-primary w-100 mt-3')}}
+                            </div>
+                        </div>
+                        {{ form.submit(class='btn btn-primary w-100 mt-3 ') }}
+                        <h6 class="pt-3 text-center">Don't have an account?<p><a href="/login" class="link-primary link-center">Sign Up</a></p></h6>
                     </form>
                 </div>
             </div>
